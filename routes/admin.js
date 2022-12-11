@@ -36,6 +36,25 @@ productHelper.addproduct(req.body,(id)=>{
  
 })
 
+// router.get('/delete-product/:id',(req,res)=>{
+//   let proId = req.params.id
+//   console.log(proId)
+//   productHelpers.deleteProduct(proId).then((response)=>{
+//     res.redirect('/admin/')
+//   })
+// })
+router.get('/delete-product/',(req,res)=>{
+  let proId = req.query.id
+  console.log("proId",proId);
+  console.log("req.id",req.query.name);
+})
+
+router.get('/edit-product/:id',async (req,res)=>{
+  let product = await productHelpers.getProductDetails(req.params.id)
+  console.log(product);
+  res.render('admin/edit-product',{admin:true,product})
+})
+
 })
 
 module.exports = router;
