@@ -52,4 +52,10 @@ router.get('/logout',(req,res)=>{
 router.get('/cart',(req,res)=>{
   res.render('user/cart')
 })
+// router.get('/add-to-cart/:id',(req,res)=>{
+//   console.log("api call");
+//   userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
+//     res.json({status:true})
+//   })
+// })
 module.exports = router;

@@ -8,13 +8,14 @@ var productHelper = require('../helpers/product-helpers')
 router.get('/', function(req, res, next) {
   productHelpers.getAllProducts().then((products)=>{
     console.log(products);
-    res.render('admin/view-products',{ admin:true, products })
+    res.render('admin/view-product',{ admin:true, products })
   })
  
   
 });
 router.get('/add-product',function(req,res){
   res.render('admin/add-product')
+  console.log('ADMIN ADDED');
 })
 
 router.post('/add-product',(req,res)=>{
