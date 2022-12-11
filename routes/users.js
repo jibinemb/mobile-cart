@@ -4,6 +4,15 @@ var router = express.Router();
 const productHelpers = require('../helpers/product-helpers');
 const userHelpers = require('../helpers/user-helpers')
 
+
+const verifyLogin = (req,res,next)=>{
+  if(req.session.loggedIn){
+    next()
+  }else{
+    res.redirect('/login')
+  }
+}
+
 /* GET home page. */
 router.get('/',async function(req, res, next) {
   let user=req.session.user
@@ -49,8 +58,28 @@ router.get('/logout',(req,res)=>{
   req.session.destroy()
   res.redirect('/')
 })
-router.get('/cart',(req,res)=>{
-  res.render('user/cart')
+
+router.get('/cart',verifyLogin,async(req,res,next)=>{
+   
+  let products = await userHelpers.getCartProducts(req.session.user._id)
+  let totalValue = 0
+  if(products.length > 0){
+    totalValue = await userHelpers.getTotalAmount(req.session.user._id)
+    res.render('user/cart',{products,user:req.session.user._id,totalValue})
+  }else{
+    res.render('user/cart-empty',{user:req.session.user._id})
+  }
+   
+   console.log(products);
+ 
+})
+
+router.get('/add-to-cart/:id',(req,res)=>{
+  let data = req.params.id;
+  console.log("data",data);
+  userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
+    res.redirect('/');
+  })
 })
 // router.get('/add-to-cart/:id',(req,res)=>{
 //   console.log("api call");

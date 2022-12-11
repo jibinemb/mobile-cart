@@ -19,6 +19,11 @@
                 {{!-- <button onclick="addToCart('{{this._id}}')"
                                 class="btn btn-primary" 
                                 color:white">Add to Cart</button> --}}
+                <a href="/add-to-cart/{{this._id}}" class="btn btn-primary" >Add to cart</a>
+                {{!-- <button onclick="addToCart('{{this._id}}')"
+                                class="btn btn" style="background-color:
+                                #2874f0;
+                                color:white">Add to Cart</button> --}}
               </div>
             </div>
           </div>
@@ -29,5 +34,35 @@
         </div>
       </div>
     </section>
+
+    {{!-- <script>
+
+      function addToCart(proId){
+        $.ajax({
+          url:'/add-to-cart/:id'+proId,
+          method:'get',
+          success:(response)=>{
+            alert(response)
+          }
+        })
+      }
+
+
+
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+</script> --}}
 
    
